@@ -3,9 +3,17 @@ A web-socket which allows users to connect to executium.com arbitrage opportunit
 
 ![alt text](https://executium.com/media/images/bitfinex-ethusd-to-binance-ethbtc-crypto-graph_247.png "Arbitrage Candles")
 
-## What is provided?
+# What is arbitrage?
+
+Arbitrage is buying/selling from one exchange, then selling/buying from the other while pocketing the difference. In simple terms it sounds extremely straight forward but there is a lot of lifting involved with regards to transfering funds, exchange fees, and other such things that you should factor in. Executium provide data about arbitrage opportunities in the cryptocurrency space and is growing the offering of tools to make it even easier for traders to take advantage of what arbitrage opportunities are available.
+
+# What is provided?
 
 We provide a nodeJS and Javascript version of the script so you can take the package and adjust as you see fit. Both scripts require that you have socket.io installed and some other dependencies which we will talk through
+
+## Is there a demo?
+
+Yes, you can go to the following link to see the .html and .js version of the script [https://executium.com/arbitrage-websocket-demo/](https://executium.com/arbitrage-websocket-demo/)
 
 ## Installing the nodejs package
 
@@ -48,13 +56,14 @@ if(ret>10 || ret<-20) { ret=-1;}
 
 We pull market data real-time and compile it 24-7, then provide these neat little lists for users to take advantage of, but outages and malformed data feeds do happen, and come sometimes impact the outputs you get from these lists. While we are satisfied the feeds are valid and correct 99.999% of time, you can never e certain, so building in multiple provisos to catch potential errors and mistakes is always a good path to travel.
 
+##  HTTPS is required
+
+You need to be running the .html script via https:// for it to work, otherwise it will fail, if you do not want to buy a ssl certificate look at Cloudflare or Certbot for free solutions.
+
 ### What is the web-socket address and port?
 
 The current websocket address is `https://arb.executium.com` on port number `2096`, we currently are positioned behind Cloudflare so please remember to go easy otherwise it could result in automatic blocks.
 
-### What is arbitrage?
-
-Arbitrage is buying/selling from one exchange, then selling/buying from the other while pocketing the difference. In simple terms it sounds extremely straight forward but there is a lot of lifting involved with regards to transfering funds, exchange fees, and other such things that you should factor in. Executium provide data about arbitrage opportunities in the cryptocurrency space and is growing the offering of tools to make it even easier for traders to take advantage of what arbitrage opportunities are available.
 
 ### Who needs this arbitrage opportunities script?
 
