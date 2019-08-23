@@ -9,7 +9,7 @@ Arbitrage is buying/selling from one exchange, then selling/buying from the othe
 
 # What is provided?
 
-We provide a nodeJS and Javascript version of the script so you can take the package and adjust as you see fit. Both scripts require that you have socket.io installed and some other dependencies which we will talk through
+We provide a nodeJS and Javascript version of the script so you can take the package and adjust as you see fit. Both scripts rely on the presence of socket.io and some other dependencies which we will talk through
 
 ## Is there a demo?
 
