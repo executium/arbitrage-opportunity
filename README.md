@@ -54,7 +54,7 @@ We provide additional measures in both scripts so that you can discount anything
 if(ret>10 || ret<-20) { ret=-1;}
 ```
 
-We pull market data real-time and compile it 24-7, then provide these neat little lists for users to take advantage of, but outages and malformed data feeds do happen, and come sometimes impact the outputs you get from these lists. While we are satisfied the feeds are valid and correct 99.999% of time, you can never be 100% certain though with so many third parties involved, so building in multiple provisos to catch potential errors and mistakes is always a good path to travel.
+We pull market data real-time and compile in an on-going cycle 24-7, then provide these neat little lists for users to take advantage of, but outages and malformed data feeds do happen, and come sometimes impact the outputs you get from these lists. While we are satisfied the feeds are valid and correct 99.999% of time, you can never be 100% certain though with so many third parties involved, so building in multiple provisos to catch potential errors and mistakes is always a good path to travel.
 
 ##  HTTPS is required
 
