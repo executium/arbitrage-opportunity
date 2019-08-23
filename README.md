@@ -85,6 +85,10 @@ We update the feed every 1 second currently, but that number is subject to chang
 
 We do not charge a fee for this service and we have rate limiting set, so any abuses will result in IP level blocking so please use fairly as you would any service to avoid disruption.
 
+### Who would want this arbitrage opportunity script?
+
+Users search for arbitrage opportunities or arbitrage scripts would be in search of this nodejs and javascript package. If you are searching for a pushed opportunity then our arbitrage opportunity list could be useful for you.
+
 #### DISCLAIMER
 
 We try our best to provide the correct spreads at the correct prices, but sometimes data can be corrupted or misinterpreted, we advise discretion with how you use the data in any setup. We do not accept any responsibility for losses incurred or profits made because of the usage and implementation of this script, use it merely as a visual guide or a trigger for any projects but do not act off of this information alone.
