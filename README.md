@@ -13,7 +13,7 @@ We provide a nodeJS and Javascript version of the script so you can take the pac
 
 ## Is there a demo?
 
-Yes, you can go to the following link to see the .html and .js version of the script [https://executium.com/arbitrage-websocket-demo/](https://executium.com/arbitrage-websocket-demo/)
+Yes, you can go to the following link to see the web-based version of the script [https://executium.com/arbitrage-websocket-demo/](https://executium.com/arbitrage-websocket-demo/)
 
 ## Installing the nodejs package
 
