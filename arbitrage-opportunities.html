@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+<head>
+<META NAME="ROBOTS" CONTENT="NOINDEX">
+<meta charset="utf-8">
+<title>Arbitrage opportunities | executium</title>
+<meta name="theme-color" content="#2a0228" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"></script>
+<link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
+<style>body { background-color:#fff;margin:0;padding:0;font-family: 'Open Sans';background-image:url(https://executium.com/m/alt/bk.png);background-position:top left;background-repeat:no-repeat}*{box-sizing:border-box;background-repeat:no-repeat;background-position:center;}.bu{padding-bottom:0.6em;margin-bottom:0.6em;border-bottom:1px solid #ccc;text-align:center;font-size:1.4em;}.ld{background-image:url(https://executium.com/m/alt/load.gif);width:256px;height:256px;margin:0 auto;background-size:contain;}.c{clear:both;}.s{border-bottom:1px solid #efefef;font-size:0.76em;padding-bottom:0.12em;margin-bottom:0.12em;}.fl{overflow:hidden;white-space:nowrap;float:left;}#output{background-color:rgba(255,255,255,0.8);border:1px solid #ccc;border-radius:0.6em;margin:2em auto;padding:0.5em;min-width:700px;max-width:1320px;color:#000;}</style>
+</head>
+<body>
+
+<div id="output"><div class="ld"></div></div>
+<script>
+
+/*
+*
+	##
+	## Arbitrage Opportunity Websocket Client
+	##
+	// Copyright (c) 2019 Executium LTD (support@executium.com)
+	//
+	// Permission is hereby granted, free of charge, to any person obtaining a
+	// copy of this software and/or associated documentation files (the
+	// "Materials"), to deal in the Materials without restriction, including
+	// without limitation the rights to use, copy, modify, merge, publish,
+	// distribute, sublicense, and/or sell copies of the Materials, and to
+	// permit persons to whom the Materials are furnished to do so, subject to
+	// the following conditions:
+	//
+	// The above copyright notice and this permission notice shall be included
+	// in all copies or substantial portions of the Materials.
+	//
+	// THE MATERIALS ARE PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+	// EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+	// MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+	// IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
+	// CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+	// TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
+	// MATERIALS OR THE USE OR OTHER DEALINGS IN THE MATERIALS.
+*
+*/
+
+    //
+    var connected=0; var symbol=' &#x20bf; ';
+    //
+    executiumSocket('https://arb.executium.com:2096');
+    //
+    function executiumSocket(ws)
+    {
+        //
+        if(connected==1) { return; }
+        //
+        connected=1;hlArray=[];
+		//
+		socket = io(ws);
+		//
+		socket.on('connect', function()
+		{
+			//
+			console.info('----> Socket Connected <----',1);
+		});
+
+		//
+		socket.on('disconnect', function()
+		{
+			//
+			console.warn('----> Socket Disconnected<----',2);
+		});
+
+		//
+		socket.on('data', function(c)
+		{
+		    //
+            try
+            {
+                // Full Data
+                var d = JSON.parse(c.d);
+
+                var h =''; var pos=0;
+
+                h+='<div class="bu">';
+                    h+='<img alt="executium" src="https://executium.com/media/static/logo1.png" width="100%" height="auto" style="max-width:200px" />';
+                h+='</div>';
+                h+='<div class="bu">';
+                    h+='Current Bitcoin Price: <strong>'+d.p+'</strong>';
+                    h+='<div style="font-size:0.6em;color:#999;">PRICE QUOTED IS BINANCE BTC/USDT CURRENT BID PRICE</div>';
+                h+='</div>';
+                h+='<div class="bu">';
+                    h+='Displaying Arbitrage Opportunities: <strong id="count">&hellip</strong>';
+                h+='</div>';
+
+                $.each(d.s,function(i,v)
+                {
+                    // Naming
+                    var code            = v[0]; // Executium code
+                    var spread          = v[1]; // Spread between the prices
+                    var difference      = v[2]; // Difference in BTC
+                    var btc_opt1        = v[3]; // BTC Converted Value
+                    var btc_opt2        = v[4]; // BTC Converted Value
+                    var current_opt1    = v[5]; // Current Market Value
+                    var current_opt2    = v[6]; // Current Market Value
+                    pos++;
+
+                    // Returns %
+                    var ret=returnPercentage(btc_opt1,btc_opt2);
+                    // We discount anything that is suspiciously too wide a spread
+                    if(ret>10 || ret<-20) { ret=-1;}
+
+                    // Display only positive returns
+                    if(ret>0)
+                    {
+
+                        h+='<div class="s">';
+                            h+='<div class="fl" style="width:5%;text-align:center;">';
+                                h+=pos;
+                            h+='</div>';
+                            h+='<div class="fl" style="width:23%;">';
+                                h+=code;
+                            h+='</div>';
+                            h+='<div class="fl" style="width:8%;background-color:#f8fce8;text-align:center;">';
+                                h+=ret+'%';
+                            h+='</div>';
+                            h+='<div class="fl" style="width:10%;text-align:center;">';
+                                h+=btc_opt1+symbol;
+                            h+='</div>';
+                            h+='<div class="fl" style="width:10%;text-align:center;">';
+                                h+=btc_opt2+symbol;
+                            h+='</div>';
+                            h+='<div class="fl" style="width:10%;text-align:center;background-color:#f8fce8;">';
+                                h+=parseFloat(difference)+symbol;
+                            h+='</div>';
+                            h+='<div class="fl" style="width:10%;text-align:center;">';
+                                h+=parseFloat(current_opt1);
+                            h+='</div>';
+                            h+='<div class="fl" style="width:12%;background-color:#efefef;text-align:center;">';
+                                h+=parseFloat(spread);
+                            h+='</div>';
+                            h+='<div class="fl" style="width:12%;text-align:center;">';
+                                h+=parseFloat(current_opt2);
+                            h+='</div>';
+                            h+='<div class="c"></div>';
+                        h+='</div>';
+                    }
+                });
+
+                //
+                $('#output').empty().html(h);
+                //
+                $('#count').empty().html(pos);
+
+            }
+            catch(e)
+            {
+                console.warn('Error',e);
+            }
+
+        });
+    }
+
+
+    function returnPercentage(e1,e2)
+    {
+        var t = e1-e2;
+        return parseFloat(t/e2*100).toFixed(2);
+    }
+
+
+</script>
+</body>
+</html>
