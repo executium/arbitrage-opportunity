@@ -3,11 +3,14 @@ A web-socket which allows users to connect to executium.com arbitrage opportunit
 
 ![alt text](https://executium.com/media/images/bitfinex-ethusd-to-binance-ethbtc-crypto-graph_247.png "Arbitrage Candles")
 
-# What is arbitrage?
+## `update` coming
+Inline with the launch of executium version 2, the arbitrage opportunity repository will be updated in early `August 2020`. Following up from the e-mail sent out to users. This particular feed will be retired `October 2020` in favor of the new improved feed that monitors 30+ top exchanges and 10s of thousands of top combinations.
+
+## What is arbitrage?
 
 Arbitrage is buying/selling from one exchange, then selling/buying from the other while pocketing the difference. In simple terms it sounds extremely straight forward but there is a lot of lifting involved with regards to transfering funds, exchange fees, and other such things that you should factor in. Executium provide data about arbitrage opportunities in the cryptocurrency space and is growing the offering of tools to make it even easier for traders to take advantage of what arbitrage opportunities are available.
 
-# What is provided?
+## What is provided?
 
 We provide a nodeJS and Javascript version of the script so you can take the package and adjust as you see fit. Both scripts rely on the presence of socket.io and some other dependencies which we will talk through
 
